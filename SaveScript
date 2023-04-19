@@ -1,0 +1,30 @@
+using System.Collections.Generic;
+using UnityEngine;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+
+[Serializable]
+
+public class SaveScript : MonoBehaviour
+{
+	   [SerializeField]List<List<int>> IntVariablesList = new List<List<int>>(); //This is the main List for ints. All other lists will be rooted in here.
+	   
+	   void Start()
+    {
+		//The following lines will have to be added to the gameobject,or whatever script that will have values stored in the save file. I've added a example, to show it will have to be done.
+		List<int> ListExample = new List<int>();
+        ListExample.Add(156);
+        ListExample.Add(234234232);
+        ListExample.Add(56453);
+		IntVariablesList.Add(ListExample); // This final line will store this list within the main List. Do keep in mind the declaration, which i didn't add here.
+		//If you need to add a new list, you can do as well. This could be done to separate variables from different chapters or areas, or anything.
+		List<int> SecondListExampe = new List<int>();
+        SecondListExampe.Add(44234234);
+        SecondListExampe.Add(523423);
+		IntVariablesList.Add(SecondListExampe);
+		
+		//Now, if you need to reference a specific variable in a specific List, do this:
+		int ExampleValue = IntVariablesList[0][1]; //The 0 is the List position within the "IntVariablesList", in this case the "ListExample", and the 1 is the variable within the "IntVariablesList" list.
+		Debug.Log(ExampleValue);
+	}
+}
